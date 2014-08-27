@@ -1,0 +1,45 @@
+body {
+	width: 60%;
+	margin: 0 auto;	
+}
+
+ul.menu {
+    list-style: none;
+    padding: 0;
+    margin: 10px 0px;
+}
+
+ul.menu li {
+    display: inline;
+    margin-right: 10px;
+}
+
+img {
+    border-style: none;
+}
+
+.floatedImage {
+	width:48px;
+	height:32px;
+	float:left;
+	margin:0.5em;
+}
+
+table {
+     border-collapse: collapse;
+ }
+
+table, th, td {
+     border: 1px solid silver;
+     padding: 3px 20px;
+}
+
+th, td {
+	min-wide: 200px;	
+}
+
+th {
+	background-color: grey;
+    color: white;
+    height: 35px;
+}

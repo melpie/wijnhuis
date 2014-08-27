@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<entity-mappings xmlns="http://java.sun.com/xml/ns/persistence/orm"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/persistence/orm
+http://java.sun.com/xml/ns/persistence/orm_2_0.xsd"
+	version="2.0">
+	<named-query name="Land.findAll">
+		<query>
+			select l from Land l order by l.naam
+		</query>
+	</named-query>
+	<named-query name="Soort.findAll">
+		<query>
+			select s from Soort s order by s.naam
+		</query>
+	</named-query>
+	<named-query name="Soort.findByLand">
+		<query>
+			select s from Soort s where s.land = :land order by s.naam
+		</query>
+	</named-query>
+	<named-query name="Wijn.findAll">
+		<query>
+			select w from Wijn w order by w.jaar
+		</query>
+	</named-query>
+	<named-query name="Wijn.findBySoort">
+		<query>
+			select w from Wijn w where w.soort = :soort order by w.jaar
+		</query>
+	</named-query>
+	<named-query name="BestelBon.findAll">
+		<query>
+			select b from BestelBon b order by b.bestelDatum
+		</query>
+	</named-query>
+</entity-mappings>

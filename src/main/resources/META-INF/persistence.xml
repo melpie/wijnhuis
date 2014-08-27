@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<persistence version="2.0"
+			xmlns="http://java.sun.com/xml/ns/persistence"
+			xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+			xsi:schemaLocation="http://java.sun.com/xml/ns/persistence
+			http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd">
+
+	<persistence-unit name="wijnhuis">
+		<non-jta-data-source>java:/comp/env/jdbc/wijnhuis</non-jta-data-source>
+		<class>be.vdab.entities.Land</class>
+		<class>be.vdab.entities.Soort</class>
+		<class>be.vdab.entities.Wijn</class>
+		<class>be.vdab.entities.BestelBon</class>
+		<class>be.vdab.entities.BestelBonLijn</class>
+	</persistence-unit>
+	
+</persistence>
