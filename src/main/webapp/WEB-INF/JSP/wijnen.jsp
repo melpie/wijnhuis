@@ -41,7 +41,11 @@
 
 	<br>
 	<br>
-
+	
+	<c:if test="${not empty foutLandId}">
+		<p class=fout>${foutLandId}</p>	
+	</c:if>
+	
 	<c:if test="${not empty land}">
 		<h2>Kies een soort uit ${land.naam}</h2>
 		<ul>
@@ -55,14 +59,18 @@
 			</c:forEach>
 		</ul>
 	</c:if>
-
+		
+	<c:if test="${not empty foutSoortId}">
+		<p class=fout>${foutSoortId}</p>	
+	</c:if>
+	
 	<c:if test="${not empty soort}">
 		<h2>Kies een wijn uit ${soort.naam}</h2>
 		<ul>
 			<c:forEach items="${wijnen}" var="wijn">
 				<c:url value="/toevoegen.htm" var="toevoegenURL">
-					<c:param name="landid" value="${land.landNr}" />
-					<c:param name="soortid" value="${soort.soortNr}" />
+<%-- 					<c:param name="landid" value="${land.landNr}" /> --%>
+<%-- 					<c:param name="soortid" value="${soort.soortNr}" /> --%>
 					<c:param name="wijnid" value="${wijn.wijnNr}" />
 				</c:url>
 				<li><a href="<c:out value='${toevoegenURL}'/>">

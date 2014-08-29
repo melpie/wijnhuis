@@ -19,10 +19,14 @@ img {
 }
 
 .floatedImage {
-	width:48px;
-	height:32px;
-	float:left;
-	margin:0.5em;
+	width: 48px;
+	height: 32px;
+	float: left;
+	margin: 0.5em;
+}
+
+.fout {
+	color: red;
 }
 
 table {

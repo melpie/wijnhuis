@@ -4,11 +4,16 @@ import javax.persistence.TypedQuery;
 
 import be.vdab.entities.Land;
 import be.vdab.entities.Soort;
+import be.vdab.exceptions.SoortNietGevondenException;
 
 public class SoortDAO extends AbstractDAO {
 
 	public Soort read(long soortNr) {
-		return getEntityManager().find(Soort.class, soortNr);
+		Soort soort = getEntityManager().find(Soort.class, soortNr);
+		if (soort==null) {
+			throw new SoortNietGevondenException();
+		}
+		return soort;
 	}
 	
 	public Iterable<Soort> findAll() {

@@ -22,7 +22,7 @@ public class BestellingService {
 		for (BestelBonLijn bbl : bestelBonLijnen) {
 			bestelBonLijnDAO.create(bbl);
 			Wijn wijn = bbl.getWijn();
-			wijn.setInBestelling(bbl.getAantal());
+			wijn.setInBestelling(wijn.getInBestelling() + bbl.getAantal());
 		}
 		
 		bestelBonDAO.commit();
