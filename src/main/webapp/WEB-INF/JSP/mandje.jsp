@@ -8,22 +8,80 @@
 <head>
 <title>WIJNEN</title>
 <link rel="stylesheet" href="${contextPath}/styles/default.css" />
+<script type="text/javascript">
+    function validateForm() {
+	    var naam = checkNaam();
+	    var straat = checkStraat();
+	    var huisnummer = checkHuisnummer();
+	    var postcode = checkPostcode();
+	    var gemeente = checkGemeente();
+	    return naam && straat && huisnummer && postcode && gemeente;
+    }
+
+    function checkNaam(){
+	    var naam=document.forms["bevestigingForm"]["naam"].value;
+	    if (naam==null || naam=="") {
+	    	document.getElementById("naamError").innerHTML = "Geef een geldige naam AUB!";
+	    	return false;
+	    }
+	    else {
+	    	document.getElementById("naamError").innerHTML = "";
+	    	return true;
+		}
+    }
+    
+    function checkStraat(){
+	    var straat=document.forms["bevestigingForm"]["straat"].value;
+	    if (straat==null || straat=="") {
+	    	document.getElementById("straatError").innerHTML = "Geef een geldige straat AUB!";
+	    	return false;
+	    }
+	    else {
+	    	document.getElementById("straatError").innerHTML = "";
+	    	return true;
+		}
+    }
+    
+    function checkHuisnummer(){
+	    var nummer=document.forms["bevestigingForm"]["huisnummer"].value;
+	    if (nummer==null || nummer=="") {
+	    	document.getElementById("huisnummerError").innerHTML = "Geef een geldig huisnummer AUB!";
+	    	return false;
+	    }
+	    else {
+	    	document.getElementById("huisnummerError").innerHTML = "";
+	    	return true;
+		}
+    }
+    
+    function checkPostcode(){
+	    var postcode=document.forms["bevestigingForm"]["postcode"].value;
+	    if (postcode==null || postcode=="") {
+	    	document.getElementById("postcodeError").innerHTML = "Geef een geldige postcode AUB!";
+	    	return false;
+	    }
+	    else {
+	    	document.getElementById("postcodeError").innerHTML = "";
+	    	return true;
+		}
+    }
+    
+    function checkGemeente(){
+	    var gemeente=document.forms["bevestigingForm"]["gemeente"].value;
+	    if (gemeente==null || gemeente=="") {
+	    	document.getElementById("gemeenteError").innerHTML = "Geef een geldige gemeente AUB!";
+	    	return false;
+	    }
+	    else {
+	    	document.getElementById("gemeenteError").innerHTML = "";
+	    	return true;
+		}
+    }
+    </script>
 </head>
 <body>
 
-	<div>
-
-		<ul class=menu>
-
-			<c:url value="/index.htm" var="wijnenURL" />
-			<c:url value="/mandje.htm" var="mandjeURL" />
-
-			<li><a href="<c:out value='${wijnenURL}'/>">Wijnen</a></li>
-			<li><a href="<c:out value='${mandjeURL}'/>">Mandje</a></li>
-
-		</ul>
-
-	</div>
+	<c:import url="/WEB-INF/JSP/menu.jsp" />
 
 	<h1>Mandje</h1>
 	
@@ -58,21 +116,26 @@
 			
 			<br><br>
 			
-			<form action="<c:url value='/bevestiging.htm'/>" method="post">
+			<form name="bevestigingForm" action="<c:url value='/bevestiging.htm'/>" method="post" onSubmit="return validateForm()">
 				<label>Naam <br> 
-					<input name="naam" value="${param.naam}" autofocus size="20" />
+					<input id="naam" name="naam" value="${param.naam}" autofocus size="20" /> 
+					<span class="fout" id="naamError"></span> 
 				</label> <br>
 				<label>Straat <br> 
-					<input name="straat" value="${param.straat}" autofocus size="20" />
+					<input id="straat" name="straat" value="${param.straat}" autofocus size="20" /> 
+					<span class="fout" id="straatError"></span> 
 				</label> <br>
 				<label>Huisnummer <br> 
-					<input name="huisnummer" value="${param.huisnummer}" autofocus size="20" />
+					<input id="huisnummer" name="huisnummer" value="${param.huisnummer}" autofocus size="20" /> 
+					<span class="fout" id="huisnummerError"></span> 
 				</label> <br>
 				<label>Postcode <br> 
-					<input name="postcode" value="${param.postcode}" autofocus size="20" />
+					<input id="postcode" name="postcode" value="${param.postcode}" autofocus size="20" /> 
+					<span class="fout" id="postcodeError"></span> 
 				</label> <br>
 				<label>Gemeente <br> 
-					<input name="gemeente" value="${param.gemeente}" autofocus size="20" />
+					<input id="gemeente" name="gemeente" value="${param.gemeente}" autofocus size="20" /> 
+					<span class="fout" id="gemeenteError"></span> 
 				</label> <br>
 				<input type="radio" name="bestelwijze" value="0">Afhalen<br>
  				<input type="radio" name="bestelwijze" value="1">Opsturen
@@ -81,12 +144,5 @@
 			</form>
  		
  		</c:if>
-	
-		
-		
-		
-		
-	
-	
 
 </body>

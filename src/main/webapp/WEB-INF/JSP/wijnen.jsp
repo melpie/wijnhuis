@@ -10,19 +10,7 @@
 </head>
 <body>
 
-	<div>
-
-		<ul class=menu>
-
-			<c:url value="/index.htm" var="wijnenURL" />
-			<c:url value="/mandje.htm" var="mandjeURL" />
-
-			<li><a href="<c:out value='${wijnenURL}'/>">Wijnen</a></li>
-			<li><a href="<c:out value='${mandjeURL}'/>">Mandje</a></li>
-
-		</ul>
-
-	</div>
+	<c:import url="/WEB-INF/JSP/menu.jsp" />
 
 	<h1>Het wijnhuis</h1>
 	<h2>Kies een land</h2>

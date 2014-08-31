@@ -10,25 +10,13 @@
 </head>
 <body>
 
-	<div>
-
-		<ul class=menu>
-
-			<c:url value="/index.htm" var="wijnenURL" />
-			<c:url value="/mandje.htm" var="mandjeURL" />
-
-			<li><a href="<c:out value='${wijnenURL}'/>">Wijnen</a></li>
-			<li><a href="<c:out value='${mandjeURL}'/>">Mandje</a></li>
-
-		</ul>
-
-	</div>
+	<c:import url="/WEB-INF/JSP/menu.jsp" />
 
 	<h1>Bestelbonnen</h1>
 
 	<c:forEach items="${bestelbonnen}" var="bestelbon">
 		<ul>
-			<li> Bestelbon nummer ${bestelbon.bonNr}: ${bestelbon.naam}
+			<li> Bestelbon ${bestelbon.bonNr}: ${bestelbon.naam}
 			<ul>
 			<c:forEach items="${bestelbon.bestelBonLijnen}" var="bestelbonlijn">
 				<li>${bestelbonlijn.aantal} x ${bestelbonlijn.wijn.soort.naam} (${bestelbonlijn.wijn.jaar}) uit ${bestelbonlijn.wijn.soort.land.naam}</li>

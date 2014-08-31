@@ -38,9 +38,15 @@ public class BevestigingServlet extends HttpServlet {
 			String huisnummer = request.getParameter("huisnummer");
 			String postcode = request.getParameter("postcode");
 			String gemeente = request.getParameter("gemeente");
-			int bestelwijze = Integer.parseInt(request.getParameter("bestelwijze"));
+			int bestelwijze;
+			try {
+				bestelwijze = Integer.parseInt(request.getParameter("bestelwijze"));
+			} catch (NumberFormatException ex) {
+				// default bestelwijze is afhalen
+				bestelwijze = 0;
+			}
 			
-			BestelBon bb = new BestelBon(new Date(),naam,straat,huisnummer,postcode,gemeente,bestelwijze);
+			BestelBon bestelBon = new BestelBon(new Date(),naam,straat,huisnummer,postcode,gemeente,bestelwijze);
 				
 			@SuppressWarnings("unchecked")
 			Map<Long, Integer> wijnNrsInMandje = (Map<Long, Integer>) session.getAttribute("mandje");
@@ -50,20 +56,18 @@ public class BevestigingServlet extends HttpServlet {
 				while (it.hasNext()) { 
 					Long wijnNr = it.next(); 
 					Wijn wijn = wijnService.read(wijnNr);
-					bestelBonLijnen.add(new BestelBonLijn(wijnNrsInMandje.get(wijnNr),wijn,bb));
+					bestelBonLijnen.add(new BestelBonLijn(wijnNrsInMandje.get(wijnNr),wijn,bestelBon));
 				}
 			}
 			
-			bestellingService.doeBestelling(bestelBonLijnen, bb);
+			bestellingService.doeBestelling(bestelBonLijnen, bestelBon);
+			request.setAttribute("bestelBon", bestelBon);
+			session.invalidate();
 		}
-		
-		
 		
 		RequestDispatcher dispatcher = request.getRequestDispatcher(VIEW);
 		dispatcher.forward(request, response);
-		
-		
+	
 	}
-
 
 }

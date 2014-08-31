@@ -10,19 +10,7 @@
 </head>
 <body>
 
-	<div>
-
-		<ul class=menu>
-
-			<c:url value="/index.htm" var="wijnenURL" />
-			<c:url value="/mandje.htm" var="mandjeURL" />
-
-			<li><a href="<c:out value='${wijnenURL}'/>">Wijnen</a></li>
-			<li><a href="<c:out value='${mandjeURL}'/>">Mandje</a></li>
-
-		</ul>
-
-	</div>
+	<c:import url="/WEB-INF/JSP/menu.jsp" />
 
 	<c:choose>
 	
@@ -57,12 +45,13 @@
 			<br>
 			<br>
 			<form action="<c:url value='/mandje.htm'/>" method="post">
-				<label>Aantal flessen: <br> <input name="aantal"
-					value="${param.aantal}" autofocus size="10" />
-					<input name="wijnid"
-					value="${wijn.wijnNr}" type="hidden"/>
-				</label> <br>
-				<br> <input type="submit" value="Toevoegen" />
+				<label>Aantal flessen: 	
+					<br> 
+					<input name="aantal" value="${param.aantal}" autofocus size="10" /> <span class=fout>${foutAantal}</span>
+					<input name="wijnid" value="${wijn.wijnNr}" type="hidden"/>
+				</label> 
+				<br><br>
+				<input type="submit" value="Toevoegen" />
 			</form>
 		</c:otherwise>
 		

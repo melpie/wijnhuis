@@ -20,7 +20,8 @@ import be.vdab.services.WijnService;
 @WebServlet("/mandje.htm")
 public class MandjeServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	private static final String VIEW = "/WEB-INF/JSP/mandje.jsp";
+	private static final String VIEWMANDJE = "/WEB-INF/JSP/mandje.jsp";
+	private static final String VIEWTOEVOEGEN = "/WEB-INF/JSP/toevoegen.jsp";
 	private static final String REDIRECT_URL = "/mandje.htm";
 	private WijnService wijnService = new WijnService();
 
@@ -52,7 +53,7 @@ public class MandjeServlet extends HttpServlet {
 			request.setAttribute("foutSession", "Mandje niet gevuld.");		
 		}
 				
-		RequestDispatcher dispatcher = request.getRequestDispatcher(VIEW);
+		RequestDispatcher dispatcher = request.getRequestDispatcher(VIEWMANDJE);
 		dispatcher.forward(request, response);
 		
 	}
@@ -63,23 +64,34 @@ public class MandjeServlet extends HttpServlet {
 		@SuppressWarnings("unchecked")
 		Map<Long, Integer> wijnNrsInMandje = (Map<Long, Integer>) session.getAttribute("mandje");
 		
-		if (request.getParameter("wijnid") != null && request.getParameter("aantal") != null) {
+		if (request.getParameter("aantal") != null) {
 			
 			if (wijnNrsInMandje == null) {
 				wijnNrsInMandje = new LinkedHashMap<Long, Integer>();
 			}
 			
 			try {
-				wijnNrsInMandje.put(Long.parseLong(request.getParameter("wijnid")), Integer.parseInt(request.getParameter("aantal")));
-				session.setAttribute("mandje", wijnNrsInMandje);
-			} catch (NumberFormatException ex) {
+				int aantal = Integer.parseInt(request.getParameter("aantal"));
 				
+				if (aantal > 0) {
+					wijnNrsInMandje.put(Long.parseLong(request.getParameter("wijnid")), aantal);
+					session.setAttribute("mandje", wijnNrsInMandje);
+				} else {
+					throw new NumberFormatException();
+				}
+			} catch (NumberFormatException ex) {
+				request.setAttribute("foutAantal", "Hoeveel flessen wilt u bestellen?");
+				String wijnID = request.getParameter("wijnid");
+				Wijn wijn = wijnService.read(Long.parseLong(wijnID));
+				request.setAttribute("wijn", wijn);
+				RequestDispatcher dispatcher = request.getRequestDispatcher(VIEWTOEVOEGEN);
+				dispatcher.forward(request, response);
 			}
+		
+			response.sendRedirect(response.encodeRedirectURL(request.getContextPath() + REDIRECT_URL));
 			
 		} 
-		
-		response.sendRedirect(response.encodeRedirectURL(request.getContextPath() + REDIRECT_URL));
-		
+				
 	}
 
 }
