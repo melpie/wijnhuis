@@ -15,7 +15,7 @@
 	    var huisnummer = checkHuisnummer();
 	    var postcode = checkPostcode();
 	    var gemeente = checkGemeente();
-	    return naam && straat && huisnummer && postcode && gemeente;
+	    return (naam && straat && huisnummer && postcode && gemeente);
     }
 
     function checkNaam(){
@@ -77,6 +77,7 @@
 	    	return true;
 		}
     }
+
     </script>
 </head>
 <body>
@@ -137,7 +138,7 @@
 					<input id="gemeente" name="gemeente" value="${param.gemeente}" autofocus size="20" /> 
 					<span class="fout" id="gemeenteError"></span> 
 				</label> <br>
-				<input type="radio" name="bestelwijze" value="0">Afhalen<br>
+				<input type="radio" name="bestelwijze" value="0" checked>Afhalen<br>
  				<input type="radio" name="bestelwijze" value="1">Opsturen
 				
 				<br> <input type="submit" value="Als bestelbon bevestigen" />

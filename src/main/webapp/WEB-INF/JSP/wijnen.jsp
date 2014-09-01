@@ -57,16 +57,17 @@
 		<ul>
 			<c:forEach items="${wijnen}" var="wijn">
 				<c:url value="/toevoegen.htm" var="toevoegenURL">
-<%-- 					<c:param name="landid" value="${land.landNr}" /> --%>
-<%-- 					<c:param name="soortid" value="${soort.soortNr}" /> --%>
 					<c:param name="wijnid" value="${wijn.wijnNr}" />
 				</c:url>
-				<li><a href="<c:out value='${toevoegenURL}'/>">
-						${wijn.jaar} </a> <c:url value="/images/ster.jpg" var="sterImage" />
+				<li>
+					<a href="<c:out value='${toevoegenURL}'/>">
+						${wijn.jaar} 
+					</a> 
+					<c:url value="/images/ster.jpg" var="sterImage" />
 					<c:forEach begin="1" end="${wijn.beoordeling}">
-						<img src="${sterImage}" title="ster" alt="ster" height="13"
-							width="13" />
-					</c:forEach></li>
+						<img src="${sterImage}" title="ster" alt="ster" height="13" width="13" />
+					</c:forEach>
+				</li>
 			</c:forEach>
 		</ul>
 	</c:if>

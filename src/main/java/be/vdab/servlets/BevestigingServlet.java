@@ -42,7 +42,7 @@ public class BevestigingServlet extends HttpServlet {
 			try {
 				bestelwijze = Integer.parseInt(request.getParameter("bestelwijze"));
 			} catch (NumberFormatException ex) {
-				// default bestelwijze is afhalen
+				// default
 				bestelwijze = 0;
 			}
 			

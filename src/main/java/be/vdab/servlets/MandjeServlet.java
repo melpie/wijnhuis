@@ -79,6 +79,7 @@ public class MandjeServlet extends HttpServlet {
 				} else {
 					throw new NumberFormatException();
 				}
+				response.sendRedirect(response.encodeRedirectURL(request.getContextPath() + REDIRECT_URL));				
 			} catch (NumberFormatException ex) {
 				request.setAttribute("foutAantal", "Hoeveel flessen wilt u bestellen?");
 				String wijnID = request.getParameter("wijnid");
@@ -87,9 +88,7 @@ public class MandjeServlet extends HttpServlet {
 				RequestDispatcher dispatcher = request.getRequestDispatcher(VIEWTOEVOEGEN);
 				dispatcher.forward(request, response);
 			}
-		
-			response.sendRedirect(response.encodeRedirectURL(request.getContextPath() + REDIRECT_URL));
-			
+					
 		} 
 				
 	}
